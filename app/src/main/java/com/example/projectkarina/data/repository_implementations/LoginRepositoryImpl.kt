@@ -10,5 +10,4 @@ object LoginRepositoryImpl : LoginRepository {
     override fun login(): Boolean {
         return true
     }
-
 }

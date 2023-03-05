@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Project Karina</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello this is main screen</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login_tv">Already have account ? Login</string>
+    <string name="login">Login</string>
+    <string name="signup_tv">Don\'t have account yet ? Sign up</string>
+    <string name="fill_fields">Fields must not be  empty</string>
+    <string name="login_success">Successfully signed in account</string>
+    <string name="auth_failed">Authentication failed. Try again</string>
+    <string name="signup_succes">Account successfully created</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="sign_up_2">SIGN UP</string>
+    <string name="sign_out">Sign out</string>
+    <string name="delete_account">Delete account</string>
+    <string name="successfully_deleted">Account successfully deleted</string>
 </resources>
