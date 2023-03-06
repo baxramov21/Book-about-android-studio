@@ -170,5 +170,19 @@ Graddle быстро создаст сборку программы и запу�
     <string name="fourth_part_title">Структура интерфейса Android Studio</string>
     <string name="fifth_part_title">Что за куча файлов вокруг?</string>
     <string name="sixth_part_title">Типы файлов. Зачем их так много?</string>
+    <string name="part1">Глава 1</string>
+    <string name="part2">Глава 2</string>
+    <string name="part3">Глава 3</string>
+    <string name="part4">Глава 4</string>
+    <string name="part5">Глава 5</string>
+    <string name="part6">Глава 6</string>
+    <string name="part7">Глава 7</string>
+    <string name="part8">Глава 8</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="welcome">Добро пожаловать</string>
+    <string name="learn_programming">Начни изучить современные профессии уже сейчас</string>
+    <string name="e_book">Электронный учебник по Android разработке</string>
+    <string name="start">Начать</string>
 
 </resources>

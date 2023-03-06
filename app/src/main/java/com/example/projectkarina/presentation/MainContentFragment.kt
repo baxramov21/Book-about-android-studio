@@ -2,9 +2,12 @@ package com.example.projectkarina.presentation
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.projectkarina.R
+import com.example.projectkarina.presentation.parts.FirstPartFragment
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -31,24 +34,17 @@ class MainContentFragment : Fragment() {
             openScreen(RegistrationFragment.newInstance())
         }
 
-    }
+        val button = requireActivity().findViewById<Button>(R.id.buttonStartLearning)
+        button.setOnClickListener {
+            openScreen(FirstPartFragment.newInstance())
+        }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.nav_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.sign_out -> {
-                signOut()
+        val callback = object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().finish()
             }
         }
-        return true
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
 
     private fun openScreen(fragment: Fragment) {
@@ -57,11 +53,6 @@ class MainContentFragment : Fragment() {
             .replace(R.id.main_container, fragment)
             .disallowAddToBackStack()
             .commit()
-    }
-
-    private fun signOut() {
-        FirebaseAuth.getInstance().signOut()
-        openScreen(RegistrationFragment.newInstance())
     }
 
     companion object {
