@@ -1,11 +1,14 @@
 package com.example.projectkarina.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
 import androidx.fragment.app.Fragment
 import com.example.projectkarina.R
 import com.example.projectkarina.databinding.FragmentRegistrationBinding
@@ -60,19 +63,25 @@ class RegistrationFragment : Fragment() {
         binding.tvLogin.setOnClickListener {
             requireActivity().supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.main_container, LoginFragment.newInstance())
-                .disallowAddToBackStack()
+                .replace(R.id.auth_container, LoginFragment.newInstance())
+                .addToBackStack("Registration")
                 .commit()
         }
+
+        val callback = object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().finish()
+                requireActivity().finishAffinity()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
 
-    private fun openMainScreen() {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.main_container, MainContentFragment.newInstance())
-            .disallowAddToBackStack()
-            .commit()
 
+
+    private fun openMainScreen() {
+        val intent = Intent(context,MainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun hideActionBar() {
