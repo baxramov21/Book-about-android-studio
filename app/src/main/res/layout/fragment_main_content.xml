@@ -11,7 +11,7 @@
         android:id="@+id/welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFEB3B"
+        android:background="#F9FB6AFD"
         android:gravity="center"
         android:padding="30dp"
         android:text="@string/welcome"
