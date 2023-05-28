@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
+    android:name=".presentation.MainActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
+    android:layout_height="match_parent">
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -20,6 +20,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/header"
-        app:menu="@menu/main_menu"/>
+        app:menu="@menu/main_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -3,6 +3,8 @@ package com.example.projectkarina.domain.usecases
 import com.example.projectkarina.domain.entities.Note
 import com.example.projectkarina.domain.repository.NotesRepository
 
-class GetNotesUseCase(private val repository: NotesRepository) {
-    operator fun invoke(): List<Note> = repository.getNotes()
+class GetNoteUseCase(private val repository: NotesRepository) {
+    suspend fun getNote(itemId: Int): Note {
+        return repository.getNote(itemId)
+    }
 }

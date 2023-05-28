@@ -2,6 +2,7 @@ package com.example.projectkarina.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,8 +13,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuItemCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.example.projectkarina.NotesListFragment
 import com.example.projectkarina.R
 import com.example.projectkarina.databinding.ActivityMainBinding
+import com.example.projectkarina.presentation.login.AuthActivity
+import com.example.projectkarina.presentation.login.RegistrationFragment
 import com.example.projectkarina.presentation.parts.*
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
@@ -47,17 +51,9 @@ class MainActivity : AppCompatActivity() {
         openScreen(MainContentFragment.newInstance())
     }
 
-    private fun openScreen(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.main_container, fragment)
-            .disallowAddToBackStack()
-            .commit()
-    }
-
     private fun createDrawer() {
-        val drawer: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nvd_menu)
+        val drawer: DrawerLayout = findViewById(com.example.projectkarina.R.id.drawer_layout)
+        val navView: NavigationView = findViewById(com.example.projectkarina.R.id.nvd_menu)
         toggle = ActionBarDrawerToggle(
             this,
             drawer,
@@ -84,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             R.id.part6 -> openScreen(SixthPartFragment.newInstance())
             R.id.part7 -> openScreen(SeventhPartFragment.newInstance())
             R.id.part8 -> openScreen(EighthPartFragment.newInstance())
+            R.id.notes -> openScreenByAddingToBackStack(NotesListFragment.newInstance())
         }
     }
 
@@ -106,7 +103,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-
         menuInflater.inflate(R.menu.nav_menu, menu)
 
         val searchItem = menu.findItem(R.id.search_bar)
@@ -123,19 +119,23 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String): Boolean {
                 val fragment = findQuery(myList, query)
                 if (fragment != null) {
-                    openFragment(fragment)
+                    openScreen(fragment)
+                    searchView.onActionViewCollapsed()
                 } else {
-                    Toast.makeText(this@MainActivity, "Not found", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.not_found),
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    openScreen(MainContentFragment.newInstance())
+                    searchView.onActionViewCollapsed()
                 }
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                val fragment = findQuery(myList, newText)
-                if (fragment != null) {
-                    openFragment(fragment)
-                }
-                return false
+                return true
             }
         })
     }
@@ -149,6 +149,7 @@ class MainActivity : AppCompatActivity() {
                 fragment = map[it]
             }
         }
+
         return fragment
     }
 
@@ -165,8 +166,17 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun openFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
+    private fun openScreen(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_container, fragment)
+            .commit()
+    }
+
+    private fun openScreenByAddingToBackStack(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
             .replace(R.id.main_container, fragment)
             .commit()
     }

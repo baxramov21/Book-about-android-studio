@@ -162,7 +162,7 @@ Graddle быстро создаст сборку программы и запу�
        •	Выбираем опцию Generate Signed APK.
         Gradle соберет для вас подходящий APK, готовый к публикации в Google Play.
     </string>
-Android
+    Android
     <string name="seventh_part_title1">Деббагинг на реальном устройстве</string>
     <string name="eighth_part_title">Упаковка приложения в подписанный APK-пакет</string>
     <string name="first_part_title">Что такое Android Studio?</string>
@@ -185,7 +185,16 @@ Android
     <string name="learn_programming">Начни изучить современные профессии уже сейчас</string>
     <string name="e_book">Электронный учебник по Android разработке</string>
     <string name="start">Начать</string>
-    <string name="search_hint">Search something</string>
-    <string name="search">Search</string>
+    <string name="search_hint">Искать повсюду</string>
+    <string name="search">Искать повсюду</string>
+    <string name="not_found">Не найдено</string>
+    <string name="add_note">Добавить заметку</string>
+    <string name="note_name">Название заметки</string>
+    <string name="note_title">Название заметки</string>
+    <string name="note_data">Значение заметки</string>
+    <string name="save">Сохранить </string>
+    <string name="new_item">Новая заметка</string>
+    <string name="notes">Закладки</string>
+    <string name="menu">Содержание</string>
 
 </resources>

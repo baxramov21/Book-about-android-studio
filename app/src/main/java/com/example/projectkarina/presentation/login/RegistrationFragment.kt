@@ -1,4 +1,4 @@
-package com.example.projectkarina.presentation
+package com.example.projectkarina.presentation.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,13 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.OnBackPressedDispatcher
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import com.example.projectkarina.R
 import com.example.projectkarina.databinding.FragmentRegistrationBinding
-import com.firebase.ui.auth.AuthUI
+import com.example.projectkarina.presentation.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -52,9 +53,10 @@ class RegistrationFragment : Fragment() {
                 buttonSignUp.setOnClickListener {
                     email = userEmail.text.toString()
                     password = userPasswrod.text.toString()
-                    if (email.isNotEmpty() && password.isNotEmpty())
+                    if (email.isNotEmpty() && password.isNotEmpty()) {
                         createAccount(email, password)
-                    else
+                        progressBarRegistration.visibility = ProgressBar.VISIBLE
+                    } else
                         showToast(getString(R.string.fill_fields))
                 }
             }
@@ -68,7 +70,7 @@ class RegistrationFragment : Fragment() {
                 .commit()
         }
 
-        val callback = object: OnBackPressedCallback(true) {
+        val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 requireActivity().finish()
                 requireActivity().finishAffinity()
@@ -78,9 +80,8 @@ class RegistrationFragment : Fragment() {
     }
 
 
-
     private fun openMainScreen() {
-        val intent = Intent(context,MainActivity::class.java)
+        val intent = Intent(context, MainActivity::class.java)
         startActivity(intent)
     }
 
@@ -97,17 +98,19 @@ class RegistrationFragment : Fragment() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
                     showToast(getString(R.string.signup_succes))
                     val user = auth.currentUser
                     openMainScreen()
+                    makeProgressBarInvisible(binding.progressBarRegistration)
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                    makeProgressBarInvisible(binding.progressBarRegistration)
                     showToast(getString(R.string.auth_failed))
                 }
             }
+    }
+
+    private fun makeProgressBarInvisible(progressBar: ProgressBar) {
+        progressBar.visibility = ProgressBar.INVISIBLE
     }
 
     companion object {
