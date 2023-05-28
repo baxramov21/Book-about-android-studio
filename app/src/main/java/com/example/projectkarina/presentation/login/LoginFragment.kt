@@ -1,15 +1,16 @@
-package com.example.projectkarina.presentation
+package com.example.projectkarina.presentation.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.projectkarina.R
 import com.example.projectkarina.databinding.FragmentLoginBinding
+import com.example.projectkarina.presentation.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment() {
@@ -42,9 +43,10 @@ class LoginFragment : Fragment() {
             buttonSignUp.setOnClickListener {
                 email = userEmail.text.toString()
                 password = userPasswrod.text.toString()
-                if (email.isNotEmpty() && password.isNotEmpty())
+                if (email.isNotEmpty() && password.isNotEmpty()) {
+                    progressBar.visibility = ProgressBar.VISIBLE
                     loginAccount(email, password)
-                else
+                } else
                     showToast(getString(R.string.fill_fields))
             }
         }
@@ -65,12 +67,11 @@ class LoginFragment : Fragment() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "signInWithEmail:success")
+                    makeProgressBarInvisible(binding.progressBar)
                     showToast(getString(R.string.login_success))
                     openMainScreen()
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+                    makeProgressBarInvisible(binding.progressBar)
                     showToast(getString(R.string.auth_failed))
                 }
             }
@@ -81,8 +82,12 @@ class LoginFragment : Fragment() {
     }
 
     private fun openMainScreen() {
-        val intent = Intent(context,MainActivity::class.java)
+        val intent = Intent(context, MainActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun makeProgressBarInvisible(progressBar: ProgressBar) {
+        progressBar.visibility = ProgressBar.INVISIBLE
     }
 
 

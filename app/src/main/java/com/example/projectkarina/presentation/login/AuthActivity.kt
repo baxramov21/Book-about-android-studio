@@ -1,4 +1,4 @@
-package com.example.projectkarina.presentation
+package com.example.projectkarina.presentation.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

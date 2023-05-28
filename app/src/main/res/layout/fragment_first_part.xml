@@ -1,26 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.parts.FirstPartFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-    <TextView
-        style="@style/Part_Title_Style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/first_part_title" />
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Text_Style"
-        android:text="@string/first_part_data" />
+            <TextView
+                style="@style/Part_Title_Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/first_part_title" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_value"
+                style="@style/Text_Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/first_part_data" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
